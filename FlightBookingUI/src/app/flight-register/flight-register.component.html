@@ -1,0 +1,35 @@
+<div class="bg-img">
+
+    <div class="container" >
+
+        <form [formGroup]='flightBookRegisterForm' (ngSubmit)="registerUser()" >
+            <div class="form-group" >
+                <label>UserName:</label>
+                <input type="text" class="form-control" formControlName="userName" >
+                <div *ngIf="flightBookRegisterForm.controls.userName.dirty && flightBookRegisterForm.controls.userName.invalid && flightBookRegisterForm.controls.userName.errors?.required" class="text-danger" > required
+                </div>
+            </div>
+            <div class="form-group" >
+                <label>Email:</label>
+                <input type="text" class="form-control" formControlName="email">
+                <div *ngIf="flightBookRegisterForm.controls.email.dirty && flightBookRegisterForm.controls.email.invalid && flightBookRegisterForm.controls.email.errors?.required" class="text-danger" > required</div>
+                </div>
+            <div class="form-group" >
+                <label>Password:</label>
+                <input type="text" class="form-control" formControlName="password">
+                <div *ngIf="flightBookRegisterForm.controls.password.dirty && flightBookRegisterForm.controls.password.invalid && flightBookRegisterForm.controls.password.errors?.required" class="text-danger" > required</div>
+                </div>
+            <div class="form-group" >
+                <label>Phone Number:</label>
+                <input type="text" class="form-control" formControlName="mobileNo">
+                <div *ngIf="flightBookRegisterForm.controls.mobileNo.dirty && flightBookRegisterForm.controls.mobileNo.invalid && flightBookRegisterForm.controls.mobileNo.errors?.required" class="text-danger" > required</div>
+                </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+            <div [class]="submitMessage==-1?'':submitMessage==0?'bg-success text-center':'bg-danger text-center'" >{{submitMessage==-1?'':submitMessage==0?'updated':'failed'}}</div>
+            
+        </form>
+    </div>
+
+
+
+    </div>
