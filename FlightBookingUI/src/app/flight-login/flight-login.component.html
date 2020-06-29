@@ -1,0 +1,18 @@
+
+<div class="bg-img">
+<form (ngSubmit) = "loginFormSubmit()" class="container">
+    <h1>Login</h1>
+    <div>
+        <label for="Username">Username</label>
+        <input type="text" class = "username" placeholder="Enter Username"
+         name="userName" [(ngModel)] ="userName" required>
+    </div>
+    <div>
+        <label for="Password">Password</label>
+        <input type="password" class = "password" placeholder="Enter Password" 
+        name="passWord"  [(ngModel)] ="passWord" required>
+    </div>
+    <button type="submit" class="btn" >Login</button>
+</form>
+</div>
+

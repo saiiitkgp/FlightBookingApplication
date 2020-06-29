@@ -1,0 +1,40 @@
+.top-left {
+    position: absolute;
+    top: 550px;
+    left: 150px;
+    font-size: 50px;
+    color: white;
+  }
+  .SignIn {
+    position:absolute; 
+    left:1000px;
+     top:40px;
+     font-size: 20px;
+    background-color:black;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  
+  .SignIn:hover {
+    opacity: 1;
+  }
+
+  .SignUp {
+    position:absolute; 
+    left:800px;
+     top:40px;
+     font-size: 20px;
+    background-color:black;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  
+  .SignUp:hover {
+    opacity: 1;
+  }
