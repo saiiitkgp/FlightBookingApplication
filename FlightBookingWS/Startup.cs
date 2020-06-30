@@ -26,6 +26,8 @@ namespace FlightDup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(); 
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +43,8 @@ namespace FlightDup
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(a => a.SetIsOriginAllowed(x => _ = true)
+            .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using FlightDup.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace FlightDup.Controllers
 {
@@ -14,23 +17,26 @@ namespace FlightDup.Controllers
         private FlightDBContext flightDBContext = new FlightDBContext();
 
         [Route("ValidateUser")]
-        [HttpGet]
-        public async Task<IActionResult> ValidateUser(string userName,
-           string passWord)
+        [HttpPost]
+        public async Task<IActionResult> ValidateUser([FromBody]Login login)
         {
             try
             {
+                FlightLoginModel flightLoginModel = new FlightLoginModel();
                 var IsValidUser = flightDBContext.FlightUsers.
-                                  Where(x => x.Username == userName && x.Password == passWord)
+                                  Where(x => x.Username == login.userName && x.Password == login.passWord)
                                   .Any();
                 if (IsValidUser)
                 {
-                    return Ok("Logged In User Is Valid");
+                    flightLoginModel.IsValidUser = IsValidUser;
+                    flightLoginModel.ResponseMessage = "Logged In Successfully";
                 }
                 else
                 {
-                    return BadRequest("Invalid User");
+                    flightLoginModel.IsValidUser = IsValidUser;
+                    flightLoginModel.ResponseMessage = "Given Credentials Are Not Valid";
                 }
+                return Ok(SerializeIntoJson(flightLoginModel));
             }
             catch (Exception e)
             {
@@ -93,12 +99,17 @@ namespace FlightDup.Controllers
                                                      .Where(x => x.FlightNumber == flightNumber)
                                                      .Select(x => x).FirstOrDefault();
 
-                return Ok(flightDetails);
+                return Ok(SerializeIntoJson(flightDetails));
             }
             catch (Exception e)
             {
                 return BadRequest("Invalid Request");
             }
+        }
+
+        public string SerializeIntoJson<T>(T model)
+        {
+            return JsonConvert.SerializeObject(model);
         }
     }
 }

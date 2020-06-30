@@ -1,6 +1,6 @@
 
 <div class="bg-img">
-<form (ngSubmit) = "loginFormSubmit()" class="container">
+<form (ngSubmit) = "loginFormSubmit(myForm)" class="container" #myForm="ngForm">
     <h1>Login</h1>
     <div>
         <label for="Username">Username</label>
