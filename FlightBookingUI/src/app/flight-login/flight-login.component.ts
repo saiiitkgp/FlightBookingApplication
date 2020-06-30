@@ -33,7 +33,7 @@ export class FlightLoginComponent implements OnInit {
         console.log(this.isAuthenticated);
         this.responseMessage = data.ResponseMessage;
         console.log(this.responseMessage);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/bookflight']);
       }
       else
       {

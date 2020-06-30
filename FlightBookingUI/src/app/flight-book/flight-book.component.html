@@ -1,0 +1,34 @@
+<div class="bg-img">
+<div class="container">
+<form [formGroup]='flightBookForm' (ngSubmit)="bookFlight(myForm)" #myForm="ngForm">
+   <div class="form-group">
+       <label>Source :</label>
+       <select class="form-control" formControlName='source'>
+           <option value="1">Hyderabad</option>
+           <option value="2">Visakhapatnam</option>
+           <option value="3">Mumbai</option>
+           <option value="4">Pune</option>
+       </select>
+    </div>
+   <div class="form-group">
+        <label>Destination :</label>
+        <select class="form-control" formControlName='destination'>
+            <option value="1">Hyderabad</option>
+            <option value="2">Visakhapatnam</option>
+            <option value="3">Mumbai</option>
+            <option value="4">Pune</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Cost :</label>
+        <input type="text" class="form-control" formControlName='cost'>
+    </div>
+    <div class="form-group">
+        <label>Ticket Details</label>
+        <input type="text" class="form-control" formControlName='ticketDetails'>
+    </div>
+    <button type="submit" class="btn btn-primary">Book</button>
+</form>
+</div>
+
+</div>
