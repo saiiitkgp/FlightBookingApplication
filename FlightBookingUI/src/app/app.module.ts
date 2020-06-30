@@ -19,11 +19,8 @@ import { FlightRegisterComponent } from './flight-register/flight-register.compo
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-<<<<<<< HEAD
-    HttpClientModule
-=======
+    HttpClientModule,
     ReactiveFormsModule
->>>>>>> 4ad7bd0594916fb9fbe4095bedb1f9bcd7f33553
   ],
   providers: [FlightLoginService],
   bootstrap: [AppComponent]
