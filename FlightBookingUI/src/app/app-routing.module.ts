@@ -17,4 +17,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [FlightHomeComponent, FlightLoginComponent]
+export const routingComponents = [FlightHomeComponent, FlightLoginComponent, FlightRegisterComponent]

@@ -4,16 +4,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FlightLoginService} from './flight-login.service';
+import {FlightRegisterService} from './flight-register.service';
 import {HttpClientModule} from '@angular/common/http'
-import { FlightHomeComponent } from './flight-home/flight-home.component';
-import { FlightLoginComponent } from './flight-login/flight-login.component';
-import { FlightRegisterComponent } from './flight-register/flight-register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    FlightRegisterComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
@@ -22,7 +19,7 @@ import { FlightRegisterComponent } from './flight-register/flight-register.compo
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [FlightLoginService],
+  providers: [FlightLoginService,FlightRegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

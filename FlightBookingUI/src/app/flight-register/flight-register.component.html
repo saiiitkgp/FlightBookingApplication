@@ -2,7 +2,7 @@
 
     <div class="container" >
 
-        <form [formGroup]='flightBookRegisterForm' (ngSubmit)="registerUser()" >
+        <form [formGroup]='flightBookRegisterForm' (ngSubmit)="registerUser(myForm)" #myForm="ngForm">
             <div class="form-group" >
                 <label>UserName:</label>
                 <input type="text" class="form-control" formControlName="userName" >

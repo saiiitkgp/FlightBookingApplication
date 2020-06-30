@@ -46,7 +46,7 @@ namespace FlightDup.Controllers
 
         [Route("RegisterUser")]
         [HttpPost]
-        public async Task<IActionResult> RegisterUser(RegisterUserModel registerUserModel)
+        public async Task<IActionResult> RegisterUser([FromBody]RegisterUserModel registerUserModel)
         {
             try
             {
@@ -58,7 +58,10 @@ namespace FlightDup.Controllers
 
                 flightDBContext.FlightUsers.Add(flightUsers);
                 flightDBContext.SaveChanges();
-                return Ok("User Registered Successfully");
+                FlightRegisterResponse flightRegisterResponse = new FlightRegisterResponse();
+                flightRegisterResponse.IsUserRegistered = true;
+                flightRegisterResponse.ReponseMessage = "User Registered Successfully";
+                return Ok(SerializeIntoJson(flightRegisterResponse));
             }
             catch (Exception e)
             {
