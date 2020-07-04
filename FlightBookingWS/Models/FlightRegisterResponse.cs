@@ -10,5 +10,7 @@ namespace FlightDup.Models
         public bool IsUserRegistered { get; set; }
 
         public string ReponseMessage { get; set; }
+
+        public bool IsUserAlreadyExists { get; set; }
     }
 }

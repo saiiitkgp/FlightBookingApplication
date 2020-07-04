@@ -11,19 +11,19 @@ import {Router } from '@angular/router';
 export class FlightBookComponent implements OnInit {
 
   flightBookForm:FormGroup
+  viewMode = 'tab1';
   constructor(private fb:FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
     this.flightBookForm=this.fb.group({
       source:['',Validators.required],
       destination:['',Validators.required],
-      cost:['',Validators.required],
       ticketDetails:['',Validators.required]
     })
   }
 
   bookFlight(myForm: NgForm)
   {
-    this.router.navigate["/home"];
+    this.router.navigate['/home'];
   }
 }

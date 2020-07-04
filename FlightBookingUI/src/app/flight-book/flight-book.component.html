@@ -1,34 +1,48 @@
+       
 <div class="bg-img">
+    <a class="btn SignUp" href="www.google.com" role="button" routerLink = "/home" routerLinkActive="active">Logout</a>
 <div class="container">
-<form [formGroup]='flightBookForm' (ngSubmit)="bookFlight(myForm)" #myForm="ngForm">
-   <div class="form-group">
-       <label>Source :</label>
-       <select class="form-control" formControlName='source'>
-           <option value="1">Hyderabad</option>
-           <option value="2">Visakhapatnam</option>
-           <option value="3">Mumbai</option>
-           <option value="4">Pune</option>
-       </select>
+
+    <div class="tab-slider--nav">
+        <ul class="tab-slider--tabs">
+          <li class="tab-slider--trigger" [class.active]="viewMode == 'tab1'" rel="tab1" (click)="viewMode ='tab1'">Book A Ticket</li>
+          <li class="tab-slider--trigger" [class.active]="viewMode == 'tab2'" rel="tab2" (click)="viewMode ='tab2'">My Bookings</li>
+        </ul>
+      </div>
+      <div class="tab-slider--container" [ngSwitch]="viewMode">
+        <div id="tab1" class="tab-slider--body" *ngSwitchCase="'tab1'">
+          <h2>Book A Ticket</h2>
+          <form [formGroup]='flightBookForm' (ngSubmit)="bookFlight(myForm)" #myForm="ngForm">
+            <div class="form-group">
+                <label>Source :</label>
+                <select class="form-control" formControlName='source'>
+                    <option value="1">Hyderabad</option>
+                    <option value="2">Visakhapatnam</option>
+                    <option value="3">Mumbai</option>
+                    <option value="4">Pune</option>
+                </select>
+             </div>
+            <div class="form-group">
+                 <label>Destination :</label>
+                 <select class="form-control" formControlName='destination'>
+                     <option value="1">Hyderabad</option>
+                     <option value="2">Visakhapatnam</option>
+                     <option value="3">Mumbai</option>
+                     <option value="4">Pune</option>
+                 </select>
+             </div>
+             <div class="form-group">
+                 <label>Ticket Details</label>
+                 <input type="text" class="form-control" formControlName='ticketDetails'>
+             </div>
+             <button type="submit" class="btn btn-primary">Book</button>
+         </form>
+        </div>
+        <div id="tab2" class="tab-slider--body" *ngSwitchCase="'tab2'">
+          <h2>Second Tab</h2>
+          <p>Please Book a flight </p>
+        </div>
     </div>
-   <div class="form-group">
-        <label>Destination :</label>
-        <select class="form-control" formControlName='destination'>
-            <option value="1">Hyderabad</option>
-            <option value="2">Visakhapatnam</option>
-            <option value="3">Mumbai</option>
-            <option value="4">Pune</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Cost :</label>
-        <input type="text" class="form-control" formControlName='cost'>
-    </div>
-    <div class="form-group">
-        <label>Ticket Details</label>
-        <input type="text" class="form-control" formControlName='ticketDetails'>
-    </div>
-    <button type="submit" class="btn btn-primary">Book</button>
-</form>
 </div>
 
 </div>

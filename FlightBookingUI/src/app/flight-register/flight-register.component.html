@@ -24,8 +24,17 @@
                 <input type="text" class="form-control" formControlName="mobileNo">
                 <div *ngIf="flightBookRegisterForm.controls.mobileNo.dirty && flightBookRegisterForm.controls.mobileNo.invalid && flightBookRegisterForm.controls.mobileNo.errors?.required" class="text-danger" > required</div>
                 </div>
+                <div class="form-group" >
+                    <label>Date Of Birth</label>
+                    <input type="date" class="form-control" formControlName="dateOfBirth">
+                    <div *ngIf="flightBookRegisterForm.controls.dateOfBirth.dirty && flightBookRegisterForm.controls.dateOfBirth.invalid && flightBookRegisterForm.controls.dateOfBirth.errors?.required" class="text-danger" > required</div>
+                    </div>
             <button type="submit" class="btn btn-primary">Register</button>
             <div [class]="submitMessage==-1?'':submitMessage==0?'bg-success text-center':'bg-danger text-center'" >{{submitMessage==-1?'':submitMessage==0?'updated':'failed'}}</div>
+            
+            <div *ngIf = "isuserexist == 'userExist'">
+                {{ usernameMessage}}
+            </div>
             
         </form>
     </div>

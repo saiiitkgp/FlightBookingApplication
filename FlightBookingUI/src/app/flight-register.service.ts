@@ -12,14 +12,16 @@ export class FlightRegisterService {
 
   constructor(private httpClient : HttpClient) { }
 
-  RegisterData(userName:string,email:string,passWord:string,phoneNumber:string):any
+  RegisterData(userName:string,email:string,passWord:string,phoneNumber:string,
+    dateOfBirth:Date):any
   {
     let register = 
     {
       Username:userName,
       Password:passWord,
       Email: email,
-      PhoneNumber : phoneNumber
+      PhoneNumber : phoneNumber,
+      DateOfBirth :dateOfBirth
     }
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'

@@ -14,8 +14,9 @@ export class FlightRegisterComponent implements OnInit {
   flightBookRegisterForm:FormGroup
   submitMessage=-1
   public registerData = []
-  isAuthenticated = false;
+  isuserexist;
   responseMessage = '';
+  usernameMessage = '';
 
   constructor(private fb:FormBuilder,private router:Router,private registerService:FlightRegisterService) { }
 
@@ -24,31 +25,28 @@ export class FlightRegisterComponent implements OnInit {
       userName:['',Validators.required],
       email:['',Validators.required],
       password:['',Validators.required],
-      mobileNo:['',Validators.required]
+      mobileNo:['',Validators.required],
+      dateOfBirth:['',Validators.required]
     })
   }
 
   registerUser(form: NgForm){
       this.registerService.RegisterData(this.flightBookRegisterForm.value.userName,
         this.flightBookRegisterForm.value.email,this.flightBookRegisterForm.value.password,
-        this.flightBookRegisterForm.value.mobileNo).
+        this.flightBookRegisterForm.value.mobileNo,
+        this.flightBookRegisterForm.value.dateOfBirth).
     subscribe((data) => {this.registerData = data
       if(data.IsUserRegistered)
-      { 
-        this.isAuthenticated = data.IsUserRegistered;
-        console.log(this.isAuthenticated);
-        this.responseMessage = data.ResponseMessage;
-        console.log(this.responseMessage);
+      {
         this.router.navigate(['/home']);
       }
       else
       {
-        this.isAuthenticated = data.IsUserRegistered;
-        console.log(this.isAuthenticated);
-        this.responseMessage = data.ResponseMessage;
-        console.log(this.responseMessage);
-        this.router.navigate(['/login']);
-        form.reset();
+        if(data.IsUserAlreadyExists)
+        {
+          this.usernameMessage = 'User Already Exists';
+          this.isuserexist = 'userExist';
+        }
       }
   });
   }
