@@ -1,0 +1,97 @@
+.container {
+    position: absolute;
+    right: 0;
+    margin-right: 530px;
+    margin-top: 100px;
+    max-width: 300px;
+    padding: 16px;
+    background-color: transparent;
+  }
+
+  .SignUp {
+    position:absolute; 
+    left: 1100px;
+    top: 50px;
+     font-size: 20px;
+     margin-top: 0px !important;
+    background-color:black;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  
+  .SignUp:hover {
+    opacity: 1;
+  }
+
+  h2 {
+    color: #345F90;
+    font-size: 24px;
+    line-height: 1.25;
+    font-family: "Roboto Slab", serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .tab-slider--nav {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+  }
+  .tab-slider--tabs {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    border-radius: 35px;
+    overflow: hidden;
+    background: #fff;
+    height: 35px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .tab-slider--tabs:after {
+    content: "";
+    width: 50%;
+    background: #345F90;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+    border-radius: 35px;
+  }
+  .tab-slider--tabs.slide:after {
+    left: 50%;
+  }
+  .tab-slider--trigger {
+    font-size: 12px;
+    line-height: 1;
+    font-weight: bold;
+    color: #345F90;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 11px 20px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-transition: color 250ms ease-in-out;
+    transition: color 250ms ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .tab-slider--trigger.active {
+    color: #fff;
+  }
+  .tab-slider--body {
+    margin-bottom: 20px;
+  }

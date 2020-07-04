@@ -6,13 +6,11 @@ import { AppComponent } from './app.component';
 import {FlightLoginService} from './flight-login.service';
 import {FlightRegisterService} from './flight-register.service';
 import {HttpClientModule} from '@angular/common/http';
-import { FlightBookComponent } from './flight-book/flight-book.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    FlightBookComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
