@@ -126,7 +126,6 @@ C:\Users\manoj.p\source\repos\FlightDup\bin\Debug\netcoreapp3.1\Microsoft.Entity
 C:\Users\manoj.p\source\repos\FlightDup\obj\Debug\netcoreapp3.1\FlightDup.csproj.CoreCompileInputs.cache
 C:\Users\manoj.p\source\repos\FlightDup\obj\Debug\netcoreapp3.1\FlightDup.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\manoj.p\source\repos\FlightDup\obj\Debug\netcoreapp3.1\FlightDup.csprojAssemblyReference.cache
-C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\FlightDup.exe
@@ -210,6 +209,7 @@ C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
@@ -258,4 +258,3 @@ C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.pdb
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.genruntimeconfig.cache
-C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.csprojAssemblyReference.cache

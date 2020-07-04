@@ -24,7 +24,7 @@ namespace FlightDup.Controllers
 
         [Route("ValidateUser")]
         [HttpPost]
-        public async Task<IActionResult> ValidateUser([FromBody]Login login)
+        public  async Task<IActionResult> ValidateUser([FromBody]Login login)
         {
             try
             {
