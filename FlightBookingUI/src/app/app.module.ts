@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {FlightLoginService} from './flight-login.service';
 import {FlightRegisterService} from './flight-register.service';
 import {HttpClientModule} from '@angular/common/http';
+import {FlightBookService} from './flight-book.service'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [FlightLoginService,FlightRegisterService],
+  providers: [FlightLoginService,FlightRegisterService,FlightBookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
