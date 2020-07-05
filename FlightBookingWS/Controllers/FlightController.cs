@@ -24,7 +24,7 @@ namespace FlightDup.Controllers
 
         [Route("ValidateUser")]
         [HttpPost]
-        public  async Task<IActionResult> ValidateUser([FromBody]Login login)
+        public async Task<IActionResult> ValidateUser([FromBody]Login login)
         {
             try
             {
@@ -43,6 +43,32 @@ namespace FlightDup.Controllers
                     flightLoginModel.ResponseMessage = "Given Credentials Are Not Valid";
                 }
                 return Ok(SerializeIntoJson(flightLoginModel));
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Invalid Request");
+            }
+        }
+
+
+        [Route("ValidateCityName")]
+        [HttpPost]
+        public async Task<IActionResult> ValidateCityName([FromBody] FlightCityModel
+            flightCityModel)
+        {
+            try
+            {
+                List<string> cityNames = flightDBContext.CityNames.
+                    Where(x => x.CityName.Contains(flightCityModel.FlightName)).
+                    Select(x => x.CityName).ToList();
+                if (cityNames != null && cityNames.Count > 0)
+                {
+                    return Ok(cityNames);
+                }
+                else
+                {
+                    return Ok(new List<string>());
+                }
             }
             catch (Exception e)
             {
@@ -106,14 +132,14 @@ namespace FlightDup.Controllers
                                           Where(x => x.Email == forgotPasswordModel.Username
                                           && x.DateOfBirth == forgotPasswordModel.DateOfBirth)
                                           .Any();
-               if(IsUserExists)
+                if (IsUserExists)
                 {
                     temporaryPassword = GenerateTemporaryPassword();
                     string mailBodyContent = BuildMailContentBody(temporaryPassword);
-                    List<MailMessage> mailMessages = 
+                    List<MailMessage> mailMessages =
                         GetMailMessage(forgotPasswordModel.Username, mailBodyContent);
                     isEmailSent = SendEmails(mailMessages);
-                    
+
                 }
                 if (isEmailSent && IsUserExists)
                 {
@@ -148,7 +174,7 @@ namespace FlightDup.Controllers
                                           .Select(x => x).FirstOrDefault();
                 flightUsers.Password = changePasswordModel.Password;
                 flightDBContext.SaveChanges();
-                ChangePasswordResponse changePasswordResponse = 
+                ChangePasswordResponse changePasswordResponse =
                     new ChangePasswordResponse();
                 changePasswordResponse.IsPasswordChanged = true;
                 return Ok(SerializeIntoJson(changePasswordResponse));
@@ -179,7 +205,7 @@ namespace FlightDup.Controllers
 
             for (int i = 0; i < lengthOfPassword; i++)
             {
-              password[i] = numericCharacters[0][random.Next(numericCharacters[0].Length - 1)];
+                password[i] = numericCharacters[0][random.Next(numericCharacters[0].Length - 1)];
             }
             string temporaryPassword = new string(password);
 
@@ -232,24 +258,24 @@ namespace FlightDup.Controllers
         {
             bool isEmailSent = false;
 
-                using (SmtpClient smtpServer = new SmtpClient("smtp.gmail.com", 587))
+            using (SmtpClient smtpServer = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtpServer.EnableSsl = true;
+                smtpServer.Credentials =
+                new NetworkCredential("manojpvs12@gmail.com", "Eiffeltower@1");
+                foreach (MailMessage mail in mailMessages)
                 {
-                    smtpServer.EnableSsl = true;
-                    smtpServer.Credentials = 
-                    new NetworkCredential("manojpvs12@gmail.com", "Eiffeltower@1");
-                  foreach (MailMessage mail in mailMessages)
+                    try
                     {
-                        try
-                        {
-                            smtpServer.Send(mail);
-                            isEmailSent = true;
-                        }
-                        catch (Exception ex)
-                        {
-                            isEmailSent = false;
-                        }
+                        smtpServer.Send(mail);
+                        isEmailSent = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        isEmailSent = false;
                     }
                 }
+            }
             return isEmailSent;
         }
     }

@@ -17,6 +17,7 @@ namespace FlightDup.Entities
         {
         }
 
+        public virtual DbSet<CityNames> CityNames { get; set; }
         public virtual DbSet<FlightAvailabilityDates> FlightAvailabilityDates { get; set; }
         public virtual DbSet<FlightDetails> FlightDetails { get; set; }
         public virtual DbSet<FlightTicketDetails> FlightTicketDetails { get; set; }
@@ -27,7 +28,7 @@ namespace FlightDup.Entities
             if (!optionsBuilder.IsConfigured)
             {
                 var builder = new ConfigurationBuilder().
-                    SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+                SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
                 var configuration = builder.Build();
                 optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
             }
@@ -35,6 +36,15 @@ namespace FlightDup.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CityNames>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.CityName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<FlightAvailabilityDates>(entity =>
             {
                 entity.HasKey(e => e.FlightAvailabilityId)
