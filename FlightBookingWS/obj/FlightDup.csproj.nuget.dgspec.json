@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\manoj.p\\Desktop\\New folder\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj": {}
+    "C:\\Users\\rupen\\Desktop\\Projects\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj": {}
   },
   "projects": {
-    "C:\\Users\\manoj.p\\Desktop\\New folder\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj": {
+    "C:\\Users\\rupen\\Desktop\\Projects\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\manoj.p\\Desktop\\New folder\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj",
+        "projectUniqueName": "C:\\Users\\rupen\\Desktop\\Projects\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj",
         "projectName": "FlightDup",
-        "projectPath": "C:\\Users\\manoj.p\\Desktop\\New folder\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj",
-        "packagesPath": "C:\\Users\\manoj.p\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\manoj.p\\Desktop\\New folder\\FlightBookingApplication\\FlightBookingWS\\obj\\",
+        "projectPath": "C:\\Users\\rupen\\Desktop\\Projects\\FlightBookingApplication\\FlightBookingWS\\FlightDup.csproj",
+        "packagesPath": "C:\\Users\\rupen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rupen\\Desktop\\Projects\\FlightBookingApplication\\FlightBookingWS\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\manoj.p\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rupen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
