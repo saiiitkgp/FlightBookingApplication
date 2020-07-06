@@ -51,19 +51,88 @@ namespace FlightDup.Controllers
         }
 
 
-        [Route("ValidateCityName")]
+        [Route("FetchFlights")]
         [HttpPost]
-        public async Task<IActionResult> ValidateCityName([FromBody] FlightCityModel
-            flightCityModel)
+        public async Task<IActionResult> FetchFlights([FromBody]FetchFlightsModel 
+            fetchFlightsModel)
+        {
+            List<FetchFlightResponse> fetchFlightResponses = new 
+                List<FetchFlightResponse>();
+            try
+            {
+
+                var flightNumbers = flightDBContext.FlightDetails
+                                    .Where(x => x.FlightSource == fetchFlightsModel.Source
+                                        && x.FlightDestination == fetchFlightsModel.Destination
+                                        && x.FlightAvailability.FlightAvailabilityDate
+                                        == fetchFlightsModel.TravelDate).Select(x => x.FlightNumber)
+                                        .ToList();
+                foreach(var flightNumber in flightNumbers)
+                {
+                    FetchFlightResponse fetchFlightResponse = new FetchFlightResponse();
+                    var businessClassDetails = flightDBContext.FlightDetails
+                                 .Where(x => x.FlightNumber == flightNumber 
+                                 && x.NoOfBusinessSeats > 0 && 
+                                 x.FlightSource == fetchFlightsModel.Source
+                                        && x.FlightDestination == fetchFlightsModel.Destination
+                                        && x.FlightAvailability.FlightAvailabilityDate
+                                        == fetchFlightsModel.TravelDate)
+                                 .Select(x => new FlightBusinessClassDetails()
+                                 {
+                                     ClassType = "Business",
+                                     NoOfSeats = x.NoOfBusinessSeats,
+                                     FlightCost = x.FlightCostBusiness
+                                 }).ToList();
+
+                    var economyClassDetails = flightDBContext.FlightDetails
+                                 .Where(x => x.FlightNumber == flightNumber &&
+                                 x.NoOfEconomySeats > 0 &&
+                                 x.FlightSource == fetchFlightsModel.Source
+                                        && x.FlightDestination == fetchFlightsModel.Destination
+                                        && x.FlightAvailability.FlightAvailabilityDate
+                                        == fetchFlightsModel.TravelDate)
+                                 .Select(x => new FlightEconomyClassDetails()
+                                 {
+                                     ClassType = "Economy",
+                                     NoOfSeats = x.NoOfEconomySeats,
+                                     FlightCost = x.FlightCostEconomy
+                                 }).ToList();
+
+                    fetchFlightResponse.FlightNumber = flightNumber;
+                    fetchFlightResponse.BusinessClassDetails = businessClassDetails;
+                    fetchFlightResponse.EconomyClassDetails = economyClassDetails;
+
+                    fetchFlightResponses.Add(fetchFlightResponse);
+                }
+
+                return Ok(SerializeIntoJson(fetchFlightResponses));
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Invalid Request");
+            }
+        }
+
+
+        [Route("ValidateCityName")]
+        [HttpGet]
+        public async Task<IActionResult> ValidateCityName(string flightName)
         {
             try
             {
-                List<string> cityNames = flightDBContext.CityNames.
-                    Where(x => x.CityName.Contains(flightCityModel.FlightName)).
-                    Select(x => x.CityName).ToList();
-                if (cityNames != null && cityNames.Count > 0)
+                if (flightName != null)
                 {
-                    return Ok(cityNames);
+                    List<string> cityNames = flightDBContext.CityNames.
+                        Where(x => x.CityName.Contains(flightName)).
+                        Select(x => x.CityName).ToList();
+                    if (cityNames != null && cityNames.Count > 0)
+                    {
+                        return Ok(cityNames);
+                    }
+                    else
+                    {
+                        return Ok(new List<string>());
+                    }
                 }
                 else
                 {
@@ -190,7 +259,6 @@ namespace FlightDup.Controllers
         {
             return JsonConvert.SerializeObject(model);
         }
-
 
         public string GenerateTemporaryPassword()
         {

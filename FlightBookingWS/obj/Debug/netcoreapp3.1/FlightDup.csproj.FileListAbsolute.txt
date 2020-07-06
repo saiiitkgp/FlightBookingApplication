@@ -258,3 +258,4 @@ C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.dll
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.pdb
 C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.genruntimeconfig.cache
+C:\Users\manoj.p\Desktop\New folder\FlightBookingApplication\FlightBookingWS\obj\Debug\netcoreapp3.1\FlightDup.csprojAssemblyReference.cache

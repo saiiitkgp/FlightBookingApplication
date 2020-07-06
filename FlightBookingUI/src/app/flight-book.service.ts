@@ -9,7 +9,9 @@ export class FlightBookService {
   constructor(private http:HttpClient) { }
 
   getCitiesList(searchChars):any{
-    return this.http.get("")
+
+    return this.http.get("https://localhost:44344/api/flight/ValidateCityName?flightName="+searchChars);
   }
 
+  
 }
