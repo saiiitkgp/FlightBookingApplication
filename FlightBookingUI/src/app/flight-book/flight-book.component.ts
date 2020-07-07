@@ -19,9 +19,12 @@ export class FlightBookComponent implements OnInit {
   toCitiesList=[]
   fetchFlights = []
   selectedFlight = []
+  classTypesList = []
   fetchedData = false;
   classType = ''
-  flightFare;
+  flightTotalFare;
+  FlightEconomyFare;
+  FlightBusinessFare;
   formShow = false;
   constructor(private fb:FormBuilder,private router:Router,private fbss:FlightBookService,
     private fetchFlight : FetchFlightService) { }
@@ -46,7 +49,38 @@ export class FlightBookComponent implements OnInit {
         console.log("hi");
         this.formShow = true;
         this.bookedFlightForm.get("flightNumber").setValue(this.selectedFlight[0].FlightNumber);
-        this.bookedFlightForm.get("classType").setValue(this.selectedFlight[0].EconomyClassDetails[0]["ClassType"] == "Economy" ?1:2); 
+
+        this.FlightEconomyFare = this.selectedFlight[0].EconomyClassDetails[0]["FlightCost"];
+        
+        if(this.selectedFlight[0].BusinessClassDetails.length> 0)
+          {
+        this.FlightBusinessFare = this.selectedFlight[0].BusinessClassDetails[0]["FlightCost"]
+          }
+
+          // if(this.selectedFlight[0].EconomyClassDetails.length> 0 && 
+          //   this.selectedFlight[0].BusinessClassDetails.length > 0 
+          //   && this.selectedFlight[0].BusinessClassDetails[0]["ClassType"] == "Economy"
+          //   &&  this.selectedFlight[0].EconomyClassDetails[0]["ClassType"] == "Business")
+          // {
+          //   console.log("Teester");
+          //   this.classTypesList.push("Economy");
+          //   this.classTypesList.push("Business");
+          // }
+
+        if( this.selectedFlight[0].EconomyClassDetails.length > 0 && this.selectedFlight[0].EconomyClassDetails[0]["ClassType"] == "Economy")
+        {
+          this.classTypesList.push("Economy");
+        this.bookedFlightForm.get("classType").setValue("Economy");
+        }
+         if( this.selectedFlight[0].BusinessClassDetails.length > 0 && this.selectedFlight[0].BusinessClassDetails[0]["ClassType"] == "Business")
+        {
+          this.classTypesList.push("Business");
+          this.bookedFlightForm.get("classType").setValue("Business"); 
+        }
+        if(this.classTypesList.length ==2)
+        {
+          this.bookedFlightForm.get("classType").setValue("Economy");
+        }
         this.fetchFlights=[]
       }
     })
@@ -72,6 +106,8 @@ export class FlightBookComponent implements OnInit {
            this.fetchedData = false;
          }
           this.fetchFlight.getFlightDetails(data)
+          this.flightTotalFare = ''
+          this.classTypesList = []
         })
   }
 
@@ -101,25 +137,25 @@ export class FlightBookComponent implements OnInit {
 
   getTotalFare($event)
   {
-    if($event.keyCode ==69 || $event.keyCode==101)
-    {
-      $event.preventDefault();
-    }
-    let max = 20;
-    console.log($event.keyCode);
-    console.log($event.target.value.length)
-    if ($event.target.value.length == max) {
-      console.log("manoj")
-      $event.preventDefault();
-  }
+    console.log($event.key);
+    let max = 3;
+    
+    let lengthValue = $event.target.value.slice(0,3);
+    this.bookedFlightForm.get("noOfSeats").setValue(lengthValue);
+
     if(($event.keyCode >= 48 && $event.keyCode <=57))
     {
-    console.log(this.selectedFlight);
-    this.flightFare = $event.target.value * 3000;
+      if(this.bookedFlightForm.value.classType == "Economy")
+      {
+        this.flightTotalFare = lengthValue * this.FlightEconomyFare;
+      }
+      if (this.bookedFlightForm.value.classType == "Business")
+      {
+        this.flightTotalFare = lengthValue * this.FlightBusinessFare;
+      }
+    
     }
-    
-     
-    
+
   }
   
 }
