@@ -16,6 +16,8 @@ namespace FlightDup.Controllers
     [ApiController]
     public class FlightController : ControllerBase
     {
+        private const string TicketNumberAlpha = "F";
+
         private FlightDBContext flightDBContext = new FlightDBContext();
 
         public static readonly string NUMERIC_CHARACTERS = "0123456789";
@@ -53,10 +55,10 @@ namespace FlightDup.Controllers
 
         [Route("FetchFlights")]
         [HttpPost]
-        public async Task<IActionResult> FetchFlights([FromBody]FetchFlightsModel 
+        public async Task<IActionResult> FetchFlights([FromBody]FetchFlightsModel
             fetchFlightsModel)
         {
-            List<FetchFlightResponse> fetchFlightResponses = new 
+            List<FetchFlightResponse> fetchFlightResponses = new
                 List<FetchFlightResponse>();
             try
             {
@@ -67,12 +69,12 @@ namespace FlightDup.Controllers
                                         && x.FlightAvailability.FlightAvailabilityDate
                                         == fetchFlightsModel.TravelDate).Select(x => x.FlightNumber)
                                         .ToList();
-                foreach(var flightNumber in flightNumbers)
+                foreach (var flightNumber in flightNumbers)
                 {
                     FetchFlightResponse fetchFlightResponse = new FetchFlightResponse();
                     var businessClassDetails = flightDBContext.FlightDetails
-                                 .Where(x => x.FlightNumber == flightNumber 
-                                 && x.NoOfBusinessSeats > 0 && 
+                                 .Where(x => x.FlightNumber == flightNumber
+                                 && x.NoOfBusinessSeats > 0 &&
                                  x.FlightSource == fetchFlightsModel.Source
                                         && x.FlightDestination == fetchFlightsModel.Destination
                                         && x.FlightAvailability.FlightAvailabilityDate
@@ -197,8 +199,11 @@ namespace FlightDup.Controllers
             try
             {
 
+                var Email = flightDBContext.FlightUsers.Where(x => x.Username == forgotPasswordModel.Username)
+                                            .Select(x => x.Email).FirstOrDefault();
+
                 var IsUserExists = flightDBContext.FlightUsers.
-                                          Where(x => x.Email == forgotPasswordModel.Username
+                                          Where(x => x.Email == Email
                                           && x.DateOfBirth == forgotPasswordModel.DateOfBirth)
                                           .Any();
                 if (IsUserExists)
@@ -206,7 +211,7 @@ namespace FlightDup.Controllers
                     temporaryPassword = GenerateTemporaryPassword();
                     string mailBodyContent = BuildMailContentBody(temporaryPassword);
                     List<MailMessage> mailMessages =
-                        GetMailMessage(forgotPasswordModel.Username, mailBodyContent);
+                        GetMailMessage(Email, mailBodyContent);
                     isEmailSent = SendEmails(mailMessages);
 
                 }
@@ -237,9 +242,11 @@ namespace FlightDup.Controllers
         {
             try
             {
+                var Email = flightDBContext.FlightUsers.Where(x => x.Username == changePasswordModel.UserName)
+                                           .Select(x => x.Email).FirstOrDefault();
 
                 FlightUsers flightUsers = flightDBContext.FlightUsers.
-                                          Where(x => x.Email == changePasswordModel.UserName)
+                                          Where(x => x.Email == Email)
                                           .Select(x => x).FirstOrDefault();
                 flightUsers.Password = changePasswordModel.Password;
                 flightDBContext.SaveChanges();
@@ -311,7 +318,7 @@ namespace FlightDup.Controllers
 
                     if (emailAttributes.ToAddress != null) mailMessage.To.
                             Add(new MailAddress(emailAttributes.ToAddress));
-                    mailMessage.From = new MailAddress("manojpvs12@gmail.com");
+                    mailMessage.From = new MailAddress("biztechcareerdomain@gmail.com");
                     mailMessage.Body = emailAttributes.Body;
                     mailMessage.Subject = emailAttributes.Subject;
                     mailMessage.IsBodyHtml = true;
@@ -330,7 +337,7 @@ namespace FlightDup.Controllers
             {
                 smtpServer.EnableSsl = true;
                 smtpServer.Credentials =
-                new NetworkCredential("manojpvs12@gmail.com", "Eiffeltower@1");
+                new NetworkCredential("biztechcareerdomain@gmail.com", "BizTechsupport@1");
                 foreach (MailMessage mail in mailMessages)
                 {
                     try
@@ -345,6 +352,115 @@ namespace FlightDup.Controllers
                 }
             }
             return isEmailSent;
+        }
+
+        [Route("SaveBookFlightDetails")]
+        [HttpPost]
+        public IActionResult SaveBookFlightDetails(SaveBookFlightDetailModel
+            saveBookFlightDetailModel)
+        {
+            try
+            {
+
+                int TicketNumberNumerical = 0;
+                FlightTicketDetails flightTicketDetails = new FlightTicketDetails();
+
+                var flightDetail = flightDBContext.FlightTicketDetails.
+                    Where(x => x.TicketNumber.Contains("F1234")).Any();
+                if (flightDetail)
+                {
+                    TicketNumberNumerical = flightDBContext.FlightTicketDetails.
+                    Max(x => Convert.ToInt32(x.TicketNumber.Substring(1, x.TicketNumber.Length - 1)) + 1);
+                    if (TicketNumberNumerical > 0)
+                        flightTicketDetails.TicketNumber = TicketNumberAlpha + TicketNumberNumerical;
+
+                    flightTicketDetails.FlightClassType = saveBookFlightDetailModel.ClassType;
+                    flightTicketDetails.FlightDestination = saveBookFlightDetailModel.FlightDestination;
+                    flightTicketDetails.FlightNumber = saveBookFlightDetailModel.FlightNumber;
+                    flightTicketDetails.FlightSource = saveBookFlightDetailModel.FlightSource;
+                    flightTicketDetails.PassengerName = saveBookFlightDetailModel.PassengerName;
+                    flightTicketDetails.Username = saveBookFlightDetailModel.Username;
+                    flightTicketDetails.TravelDate = saveBookFlightDetailModel.TravelDate;
+                }
+                else
+                {
+                    flightTicketDetails.TicketNumber = "F1234";
+
+                    flightTicketDetails.FlightClassType = saveBookFlightDetailModel.ClassType;
+                    flightTicketDetails.FlightDestination = saveBookFlightDetailModel.FlightDestination;
+                    flightTicketDetails.FlightNumber = saveBookFlightDetailModel.FlightNumber;
+                    flightTicketDetails.FlightSource = saveBookFlightDetailModel.FlightSource;
+                    flightTicketDetails.PassengerName = saveBookFlightDetailModel.PassengerName;
+                    flightTicketDetails.Username = saveBookFlightDetailModel.Username;
+                    flightTicketDetails.TravelDate = saveBookFlightDetailModel.TravelDate;
+                }
+
+
+                flightDBContext.FlightTicketDetails.Add(flightTicketDetails);
+                flightDBContext.SaveChanges();
+
+                FlightBookedModel flightBookedModel = new FlightBookedModel();
+                flightBookedModel.IsFlightBooked = true;
+                flightBookedModel.ResponseMessage = "Flight Booked Successfully";
+
+                return Ok(SerializeIntoJson(flightBookedModel));
+            }
+            catch (Exception e)
+            {
+                return BadRequest("InvalidRequuest");
+            }
+
+        }
+
+        [Route("MyBookings")]
+        [HttpGet]
+        public IActionResult MyBookings(string userName)
+        {
+            try
+            {
+                var result = flightDBContext.FlightTicketDetails.Where(x => x.Username == userName)
+                    .Select(x => x).ToList();
+
+                if (result != null)
+                {
+                    return Ok(SerializeIntoJson(result));
+                }
+                else
+                {
+                    return Ok("Currently you dont have any orders to display");
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Invalid Request");
+            }
+        }
+
+        [Route("CancelFlight")]
+        [HttpDelete]
+        public IActionResult CancelFlight(string FlightTicketNumber)
+        {
+            try
+            {
+                var flight = flightDBContext.FlightTicketDetails.
+                    Where(x => x.TicketNumber == FlightTicketNumber)
+                    .Select(x => x).FirstOrDefault();
+                flightDBContext.FlightTicketDetails.Remove(flight);
+
+                flightDBContext.SaveChanges();
+
+                FlightCancelModel flightCancelModel = new FlightCancelModel();
+                flightCancelModel.IsFlightCancelled = true;
+                flightCancelModel.ResponseMessage = "Flight Cancelled Successfully";
+
+                return Ok(SerializeIntoJson(flightCancelModel));
+            }
+            catch(Exception e)
+            {
+                return BadRequest("Invalid Request");
+            }
+
         }
     }
 }

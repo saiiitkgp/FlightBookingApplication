@@ -1,8 +1,9 @@
-<div>
+
 <div *ngFor = "let g of fetchFlights; let i = index" (click) = "flightDetails(i)">
-    <div class="card-columns">
+  <div class="row my-flex-card">
+    <div class="col-lg-3 col-sm-6">
       <div class="card bg-light details">
-        <div class="card-body" style="background-color: #fed8b1; width: 263px;">
+        <div class="card-body shadow-lg bg-white rounded" style="width: 263px;">
          <label>Flight Number :  <span class="text-primary">{{ g.FlightNumber }} </span> </label>
          <label *ngIf = " g.EconomyClassDetails.length > 0 && g.EconomyClassDetails[0]['FlightCost'] >0 ">EconomyCost   :  <span class="text-primary">{{ g.EconomyClassDetails[0]['FlightCost']   }}</span> </label>
          <label *ngIf = " g.BusinessClassDetails.length > 0 && g.BusinessClassDetails[0]['FlightCost'] >0 ">BusinessCost: <span class="text-primary">{{ g.BusinessClassDetails[0]['FlightCost'] }}</span> </label>
@@ -10,5 +11,5 @@
       </div>
       <br>
      </div>
+     </div>
       </div>
-    </div>

@@ -1,0 +1,31 @@
+
+<app-layout></app-layout>
+<div>
+    <table border="1" class="table center">
+        <thead>
+            <th>Flight Number</th>
+            <th>Ticket Number</th>
+            <th>Passenger Name</th>
+            <th>Flight Source</th>
+            <th>Flight Destination</th>
+            <th>Travel Date</th>
+            <th>Class Type</th>
+            <th> Action </th>
+        </thead>
+        <tbody>
+            <tr *ngFor ="let d of mybookings; let i = index ">
+                <td>{{d.FlightNumber}}</td>
+                <td>{{d.TicketNumber}}</td>
+                <td>{{d.PassengerName}}</td>
+                <td>{{d.FlightSource}}</td>
+                <td>{{d.FlightDestination}}</td>
+                <td>{{d.TravelDate}}</td>
+                <td>{{d.FlightClassType}}</td>
+                <td><button type = "submit" class="btn btn-danger" (click) = "CancelFlight(i,d.TicketNumber)">Cancel Flight</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="text-danger" *ngIf = "flightCancelled == true" style="text-align: center;">
+  {{"Flight Cancelled Successfully"}}
+</div>

@@ -1,24 +1,6 @@
+<app-layout></app-layout>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link"  style= "margin-left: 125px;" routerLink = "/bookflight" href="#">Book Flight <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style= "margin-left: 352px;" routerLink = "/register" href="#">My Bookings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style= "margin-left: 440px;"  routerLink = "/login"  href="#">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-        <div class="containerFlight">
+        <div class="containerFlight" style="margin-left: 134px !important;">
           <form [formGroup]='flightBookForm' (ngSubmit)="bookFlight(myForm)" #myForm="ngForm" class ="form-inline" style="margin-bottom: 40px;">
             <div class="form-group mr-2">
                 <label style="padding-right: 10px;">Source :</label>
@@ -42,34 +24,16 @@
              <button type="submit" class="btn btn-primary">Fetch Flight Details</button>
          </form>
         
-        <app-flight-details *ngIf="fetchFlights.length>0"></app-flight-details>
-       
-        <div *ngIf = "fetchedData == true" class="text-center text-danger">
+         <div *ngIf = "fetchedData == true" class="text-center text-danger">
           {{"No Flights Available For the selected dates"}}
          </div>
         
-         <form *ngIf = "formShow == true" [formGroup]='bookedFlightForm' (ngSubmit)="bookedFlight(myForm)" #myForm="ngForm" style="margin-left: 400px; margin-top: 35px;margin-right: 729px;">
-          <div class="form-group">
-              <label>FlightNumber :</label>
-              <input type="text" class="form-control"  formControlName = 'flightNumber' >
-           </div>
-          <div class="form-group">
-               <label>Class Type :</label>
-              <select id = "Classtype" class="form-control" formControlName = 'classType'>
-                <option *ngFor="let d of classTypesList" [value]="d">{{d}}</option>
-              </select>
-           </div>
-           <div class="form-group" >
-              <label >No Of Seats</label>
-              <input type="number" class="form-control" formControlName="noOfSeats" (keyup)= "getTotalFare($event)">
-           </div>
-           <button type="submit" class="btn btn-primary">Book Flight</button>
-          
-       </form>
-       <div *ngIf = "flightTotalFare > 0" style="margin-left: 403px; margin-top: 20px;font-size: 40px;">
-        Total :  {{flightTotalFare}}  
-      </div> 
-      </div>    
+        <app-flight-details *ngIf="fetchFlights.length>0"></app-flight-details>
+       
+        <app-flight-book-select [selectedFlight]='selectedFlight' [FlightFetchDetails] = 'FlightFetchDetails' *ngIf = "formShow == true"  ></app-flight-book-select>
+        </div>
+        
+
        
       
             

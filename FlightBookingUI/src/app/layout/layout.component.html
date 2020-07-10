@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link my-booking-link" style= "margin-left: 125px;" [ngClass]="{'active': selectedItemBookFlight}" (click) = "bookflight()">Book Flight</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link my-booking-link" [ngClass]="{'active': selectedItemMyBook}" style= "margin-left: 352px;" (click) = "Mybookings()">My Bookings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link my-booking-link" [ngClass]="{'active': seletcedItemLogout}" style= "margin-left: 440px;" (click) = "logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>

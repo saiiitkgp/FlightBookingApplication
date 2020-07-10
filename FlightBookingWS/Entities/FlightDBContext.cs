@@ -28,7 +28,7 @@ namespace FlightDup.Entities
             if (!optionsBuilder.IsConfigured)
             {
                 var builder = new ConfigurationBuilder().
-                SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+               SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
                 var configuration = builder.Build();
                 optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
             }
@@ -85,7 +85,12 @@ namespace FlightDup.Entities
 
             modelBuilder.Entity<FlightTicketDetails>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.TicketNumber)
+                    .HasName("PK__FlightTi__CBED06DB66C8C9CA");
+
+                entity.Property(e => e.TicketNumber)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.FlightClassType)
                     .HasMaxLength(10)
@@ -105,10 +110,6 @@ namespace FlightDup.Entities
 
                 entity.Property(e => e.PassengerName)
                     .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TicketNumber)
-                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TravelDate)

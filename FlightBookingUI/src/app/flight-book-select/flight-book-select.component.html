@@ -1,0 +1,27 @@
+
+   <form  [formGroup]='bookedFlightForm' (ngSubmit)="bookedFlight(myForm)" #myForm="ngForm" style="margin-left: 278px;margin-top: 35px;margin-right: 700px;">
+    <div class="form-group">
+        <label>Passenger Name :</label>
+        <input type="text" class="form-control"  formControlName = 'passengerName' placeholder="Enter Passenger name" >
+     </div>
+    <div class="form-group">
+        <label>FlightNumber :</label>
+        <input type="text" class="form-control"  formControlName = 'flightNumber' >
+     </div>
+    <div class="form-group">
+         <label>Class Type :</label>
+        <select id = "Classtype" class="form-control" formControlName = 'classType' (change) = "ChangeClassType()">
+          <option *ngFor="let d of classTypesList" [value]="d">{{d}}</option>
+        </select>
+     </div>
+     <div class="form-group" >
+        <label >No Of Seats</label>
+        <input type="number" class="form-control" formControlName="noOfSeats" (keyup)= "getTotalFare($event)">
+     </div>
+     <button type="submit" class="btn btn-primary">Book Flight</button>
+    
+ </form>
+
+ <div *ngIf = "flightTotalFare > 0"  style="margin-left: 280px; margin-top: 20px;font-size: 40px;">
+  Total :  {{flightTotalFare}}  
+</div>  

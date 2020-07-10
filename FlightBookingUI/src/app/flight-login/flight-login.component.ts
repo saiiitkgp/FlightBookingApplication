@@ -13,6 +13,7 @@ export class FlightLoginComponent implements OnInit {
   userName = ''
   passWord=''
   isAuthenticated = false;
+  InvalidCredentials = '';
   responseMessage = '';
   public userData = [];
   
@@ -24,27 +25,22 @@ export class FlightLoginComponent implements OnInit {
 
   loginFormSubmit(form: NgForm)
   {
-    console.log(this.userName, this.passWord);
-      this.loginService.getUserLoginData(this.userName,this.passWord).
+    this.loginService.getUserLoginData(this.userName,this.passWord).
     subscribe((data) => {this.userData = data
       if(data.IsValidUser)
       { 
-        this.isAuthenticated = data.IsValidUser;
-        console.log(this.isAuthenticated);
-        this.responseMessage = data.ResponseMessage;
-        console.log(this.responseMessage);
+        this.isAuthenticated = true;
+        this.loginService.getUserName(this.userName);
+        this.loginService.validUser(data.IsValidUser);
         this.router.navigate(['/bookflight']);
       }
       else
-      {
-        this.isAuthenticated = data.IsValidUser;
-        console.log(this.isAuthenticated);
-        this.responseMessage = data.ResponseMessage;
-        console.log(this.responseMessage);
-        this.router.navigate(['/login']);
-        form.reset();
+      { 
+        this.isAuthenticated = false;
+        this.InvalidCredentials = 'Given credentials are not valid . Please re-enter your credentials';
+        this.loginService.getUserName('');
+
       }
   });
-    // console.log(this.isAuthenticated, this.responseMessage);
     }
   }

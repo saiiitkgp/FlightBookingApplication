@@ -16,4 +16,7 @@
     <button type="submit" class="btn" >Login</button>
 </form>
 </div>
+<div *ngIf = "!isAuthenticated" class="text-danger" style="margin-left: 123px;">
+    {{InvalidCredentials}}
+</div>
 

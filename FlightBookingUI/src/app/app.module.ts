@@ -7,13 +7,19 @@ import {FlightLoginService} from './flight-login.service';
 import {FlightRegisterService} from './flight-register.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FlightBookService} from './flight-book.service';
-import { FlightDetailsComponent } from './flight-details/flight-details.component'
+import { FlightDetailsComponent } from './flight-details/flight-details.component';
+import { FlightBookSelectComponent } from './flight-book-select/flight-book-select.component';
+import { MyBookingsComponent } from './my-bookings/my-bookings.component';
+import { LayoutComponent } from './layout/layout.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    FlightDetailsComponent
+    FlightDetailsComponent,
+    FlightBookSelectComponent,
+    MyBookingsComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
